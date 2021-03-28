@@ -10,7 +10,7 @@ def call_result(label_result, n1,n2):
 
 
 root = tk.Tk()
-root.geometry('400x200+100+200')
+root.geometry('400x300+100+200')
 
 root.title('Calculator')
 

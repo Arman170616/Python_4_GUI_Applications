@@ -3,7 +3,7 @@ from tkinter import messagebox
 
 top = Tk()
 
-top.geometry('200x100')
+top.geometry('300x300')
 
 def fun():
     messagebox.showinfo('hello', 'Red button clicked!')
