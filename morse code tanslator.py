@@ -1,5 +1,5 @@
 import tkinter
-from tkinter import IntVar
+from tkinter import IntVar, END
 
 
 #Define window
@@ -19,6 +19,35 @@ text_color = '#f8f8ff'
 root.config(bg=root_color)
 
 #define function
+def convert():
+    ''' call the appropriate conversion function based off radio button values '''
+    #English to morse code
+    if language.get() == 1:
+        get_morse() # here, 1= value
+    elif language.get()  == 2:
+        get_english() # here, 2 = value
+
+def get_morse():
+    """ convert an english to morse code  """
+    #string to hold morse code  
+    morse_code = ""
+
+    #get the input text and standardize it to lower case 
+    text = input_text.get('1.0', END)
+    text = text.lower()
+
+    #remove any letters of symbols not in our dict keys
+    for letter in text:
+        if letter not in english_to_morse.keys():
+            text = text.replace(letter, '')
+    print(text)
+
+def get_english():
+    print('english')
+
+
+
+
 
 #Create our morse code dictionaries
 english_to_morse = {
@@ -96,7 +125,7 @@ output_text = tkinter.Text(output_frame, height=8, width=30, bg=text_color)
 output_text.grid(row=0, column=1, rowspan=4, padx=5, pady=5)
 
 
-convert_button = tkinter.Button(output_frame, text='Convert', font=button_font, bg=button_color)
+convert_button = tkinter.Button(output_frame, text='Convert', font=button_font, bg=button_color, command=convert)
 play_button = tkinter.Button(output_frame, text='Play Morse', font=button_font, bg=button_color)
 clear_button = tkinter.Button(output_frame, text='Clear', font=button_font, bg=button_color)
 quit_button = tkinter.Button(output_frame, text='Quit', font=button_font, bg=button_color, command=root.destroy)
