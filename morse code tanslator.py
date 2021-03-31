@@ -5,7 +5,7 @@ from tkinter import IntVar
 #Define window
 root = tkinter.Tk()
 root.title('morse code tanslator')
-root.geometry('500x350')
+root.geometry('500x380')
 #root.iconbitmap('Icons8-Ios7-Industry-Radio-Tower.ico')
 root.resizable(0,0)
 
@@ -81,7 +81,7 @@ language = IntVar()
 language.set(1)
 morse_button = tkinter.Radiobutton(input_frame, text="English --> Morse Code", variable=language, value=1, font=button_font, bg=frame_color) 
 english_button = tkinter.Radiobutton(input_frame, text="Morse Code --> English", variable=language, value=2, font=button_font, bg=frame_color) 
-guide_button = tkinter.Button(input_frame, text='Guide', font=button_font, bg=frame_color)
+guide_button = tkinter.Button(input_frame, text='Guide', font=button_font, bg=button_color)
 
 
 
@@ -90,10 +90,22 @@ english_button.grid(row=1, column=0)
 guide_button.grid(row=2, column=0, sticky='WE', padx=10)
 
 
+#layout for the output frame
+
+output_text = tkinter.Text(output_frame, height=8, width=30, bg=text_color)
+output_text.grid(row=0, column=1, rowspan=4, padx=5, pady=5)
 
 
+convert_button = tkinter.Button(output_frame, text='Convert', font=button_font, bg=button_color)
+play_button = tkinter.Button(output_frame, text='Play Morse', font=button_font, bg=button_color)
+clear_button = tkinter.Button(output_frame, text='Clear', font=button_font, bg=button_color)
+quit_button = tkinter.Button(output_frame, text='Quit', font=button_font, bg=button_color, command=root.destroy)
 
 
+convert_button.grid(row=0, column=0, padx=10, ipadx=50) #converts ipadx defines column width
+play_button.grid(row=1, column=0, padx=10,sticky='WE')
+clear_button.grid(row=2, column=0, padx=10,sticky='WE')
+quit_button.grid(row=3, column=0, padx=10,sticky='WE')
 
 
 
