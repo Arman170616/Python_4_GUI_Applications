@@ -40,7 +40,26 @@ def get_morse():
     for letter in text:
         if letter not in english_to_morse.keys():
             text = text.replace(letter, '')
-    print(text)
+            
+    #break up into individual words base on space " " and put into a list
+    word_list = text.split(" ")
+    print(word_list)
+
+    #turn each individual word in word_list into a list of letters.
+    for word in word_list:
+        letters = list(word)
+        print(letters)
+        #for each letter, get the morse code representation and append it to the string morse_code
+        for letter in letters:
+            morse_char = english_to_morse[letter]
+            morse_code += morse_char
+
+            #seperate individual letters with a space
+            morse_code += " "
+        #Seperate individual words with a |
+        morse_code += " "
+        print(morse_code)
+    output_text.insert('1.0', morse_code)
 
 def get_english():
     print('english')
