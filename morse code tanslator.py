@@ -1,4 +1,5 @@
 import tkinter
+from tkinter import IntVar
 
 
 #Define window
@@ -65,11 +66,38 @@ morse_to_english = dict([(value, key) for key, value in english_to_morse.items()
 
 #define layout
 #create frames
-
 input_frame = tkinter.LabelFrame(root, bg=frame_color)
 input_frame.pack(padx=16, pady=(16,8))
 output_frame = tkinter.LabelFrame(root, bg=frame_color)
 output_frame.pack(padx=16, pady=(8,16))
+
+
+#layout for the input frame
+
+input_text = tkinter.Text(input_frame, height=8, width=30, bg=text_color)
+input_text.grid(row=0, column=1, rowspan=3, padx=5, pady=5)
+
+language = IntVar()
+language.set(1)
+morse_button = tkinter.Radiobutton(input_frame, text="English --> Morse Code", variable=language, value=1, font=button_font, bg=frame_color) 
+english_button = tkinter.Radiobutton(input_frame, text="Morse Code --> English", variable=language, value=2, font=button_font, bg=frame_color) 
+guide_button = tkinter.Button(input_frame, text='Guide', font=button_font, bg=frame_color)
+
+
+
+morse_button.grid(row=0, column=0, pady=(15,0))
+english_button.grid(row=1, column=0)
+guide_button.grid(row=2, column=0, sticky='WE', padx=10)
+
+
+
+
+
+
+
+
+
+
 
 
 root.mainloop()
