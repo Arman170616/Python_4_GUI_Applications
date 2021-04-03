@@ -1,5 +1,8 @@
 import tkinter
 from tkinter import IntVar, END
+#from playsound import playsound
+#import playsound
+#from PIL import ImageTk, Image
 
 
 #Define window
@@ -92,7 +95,51 @@ def get_english():
    
     
 
+def clear():
+    input_text.delete('1.0', END)
+    output_text.delete('1.0', END)
 
+
+
+def play():
+    """ play tones for corresponding dots and dashes """
+    #Determine where the morse code is:
+    if language.get() == 1:
+        text = output_text.get('1.0', END)
+    elif language.get() == 2:
+        text = input_text.get('1.0', END)
+
+    #play the tones(., -, " ", | )
+    for value in text:
+        if value == ".":
+            playsound('dot.mp3')
+            root.after(100)
+        elif value == "-":
+            playsound('dash.mp3')
+            root.after(200)
+        elif value == " ":
+            root.after(300)
+        elif value == "|":
+            root.after(700)
+        
+
+def show_guide():
+    '''show a morse code guide in a second window'''
+    #Image 'morse' needs to be a global variables to put on our window.
+    #window 'guide' needs to be global to close in another function.
+    global morse
+    global guide
+
+    #create second window relative to the root window
+    guide = tkinter.Toplevel()
+    guide.title('Morse Guide')
+    guide.geometry('500x380+'+ str(root.winfo_x()+500) + "+" + str(root.winfo_y()))
+    guide.config(bg=root_color)
+
+    #create the image, label and pack
+    morse = ImageTk.PhotoImage(Image.open('morse_chart.JPG'))
+    label = tkinter.Label(guide, image=morse, bg=frame_color)
+    label.pack(padx=10, pady=10, ipadx=5, ipady=5)
 
 
 
@@ -159,7 +206,7 @@ language = IntVar()
 language.set(1)
 morse_button = tkinter.Radiobutton(input_frame, text="English --> Morse Code", variable=language, value=1, font=button_font, bg=frame_color) 
 english_button = tkinter.Radiobutton(input_frame, text="Morse Code --> English", variable=language, value=2, font=button_font, bg=frame_color) 
-guide_button = tkinter.Button(input_frame, text='Guide', font=button_font, bg=button_color)
+guide_button = tkinter.Button(input_frame, text='Guide', font=button_font, bg=button_color, command=show_guide)
 
 
 
@@ -175,8 +222,8 @@ output_text.grid(row=0, column=1, rowspan=4, padx=5, pady=5)
 
 
 convert_button = tkinter.Button(output_frame, text='Convert', font=button_font, bg=button_color, command=convert)
-play_button = tkinter.Button(output_frame, text='Play Morse', font=button_font, bg=button_color)
-clear_button = tkinter.Button(output_frame, text='Clear', font=button_font, bg=button_color)
+play_button = tkinter.Button(output_frame, text='Play Morse', font=button_font, bg=button_color, command=play)
+clear_button = tkinter.Button(output_frame, text='Clear', font=button_font, bg=button_color, command=clear)
 quit_button = tkinter.Button(output_frame, text='Quit', font=button_font, bg=button_color, command=root.destroy)
 
 
